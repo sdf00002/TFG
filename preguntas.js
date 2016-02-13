@@ -121,10 +121,14 @@ function validacion(iden){
  var i;
  var ok=0;
 var opt=document.getElementsByName(iden[0].name);
+
  for(i=0; i<opt.length;i++){
-  if(opt[i].checked)
+ // if(opt[i].checked)
+	if(opt[i].checked && opt[i].getAttribute("correcta")=="true")
   {
    ok=1
+  // alert(opt[i].attributes[2].value);
+  //alert(opt[i].getAttribute("correcta"));
   }    
  }
 
