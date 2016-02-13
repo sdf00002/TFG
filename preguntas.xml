@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<preguntas>
+
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 1</titulo>	
+		<opcion name="equipo" value="bayern" correcta="true">bayern</opcion>
+		<opcion name="equipo" value="real" correcta="false">real</opcion>
+		<opcion name="equipo" value="barsa" correcta="false">barsa</opcion>
+		<opcion name="equipo" valor="chelsea" correcta="false">chelsea</opcion>
+</pregunta>
+
+<pregunta tipo="multiple">
+	<titulo>Responde a la pregunta 2</titulo>
+		<opcion name="curso" value="primero" correcta="false">primero</opcion>
+		<opcion name="curso" value="segundo" correcta="false">segundo</opcion>
+		<opcion name="curso" value="tercero" correcta="true">tercero</opcion>
+		<opcion name="curso" value="cuarto" correcta="true">cuarto</opcion>
+</pregunta>
+
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 3</titulo>
+		<opcion name="asignatura" value="SSLL" correcta="true">SSLL</opcion>
+		<opcion name="asignatura" value="EG" correcta="false">EG</opcion>
+		<opcion name="asignatura" value="SSTT" correcta="false">SSTT</opcion>
+		<opcion name="asignatura" value="RRBBDDMM" correcta="false">RRBBDDMM</opcion>
+</pregunta>
+
+</preguntas>
