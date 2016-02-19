@@ -3,26 +3,73 @@
 
 <pregunta tipo="unica">
 	<titulo> Responde a la pregunta 1</titulo>	
-		<opcion name="equipo" value="bayern" correcta="true">bayern</opcion>
-		<opcion name="equipo" value="real" correcta="false">real</opcion>
-		<opcion name="equipo" value="barsa" correcta="false">barsa</opcion>
-		<opcion name="equipo" valor="chelsea" correcta="false">chelsea</opcion>
+		<opcion name="equipo" value="bayern" puntos="5">bayern</opcion>
+		<opcion name="equipo" value="real" 	puntos="0">real</opcion>
+		<opcion name="equipo" value="barsa" puntos="0">barsa</opcion>
+		<opcion name="equipo" valor="chelsea" puntos="0">chelsea</opcion>
 </pregunta>
 
 <pregunta tipo="multiple">
 	<titulo>Responde a la pregunta 2</titulo>
-		<opcion name="curso" value="primero" correcta="false">primero</opcion>
-		<opcion name="curso" value="segundo" correcta="false">segundo</opcion>
-		<opcion name="curso" value="tercero" correcta="true">tercero</opcion>
-		<opcion name="curso" value="cuarto" correcta="true">cuarto</opcion>
+		<opcion name="curso" value="primero" puntos="0">primero</opcion>
+		<opcion name="curso" value="segundo" puntos="0">segundo</opcion>
+		<opcion name="curso" value="tercero" puntos="2.5">tercero</opcion>
+		<opcion name="curso" value="cuarto" puntos="2.5">cuarto</opcion>
 </pregunta>
 
 <pregunta tipo="unica">
 	<titulo> Responde a la pregunta 3</titulo>
-		<opcion name="asignatura" value="SSLL" correcta="true">SSLL</opcion>
-		<opcion name="asignatura" value="EG" correcta="false">EG</opcion>
-		<opcion name="asignatura" value="SSTT" correcta="false">SSTT</opcion>
-		<opcion name="asignatura" value="RRBBDDMM" correcta="false">RRBBDDMM</opcion>
+		<opcion name="asignatura" value="SSLL" puntos="5">SSLL</opcion>
+		<opcion name="asignatura" value="EG" puntos="0">EG</opcion>
+		<opcion name="asignatura" value="SSTT" puntos="0">SSTT</opcion>
+		<opcion name="asignatura" value="RRBBDDMM" puntos="0">RRBBDDMM</opcion>
+</pregunta>
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 4</titulo>	
+		<opcion name="metodo" value="invite" puntos="5">invite</opcion>
+		<opcion name="metodo" value="ack" 	puntos="0">ack</opcion>
+		<opcion name="metodo" value="options" puntos="0">options</opcion>
+		<opcion name="metodo" valor="bye" puntos="0">bye</opcion>
+</pregunta>
+
+<pregunta tipo="multiple">
+	<titulo>Responde a la pregunta 5</titulo>
+		<opcion name="servidor" value="deregistro" puntos="1.7">de registro</opcion>
+		<opcion name="servidor" value="proxy" puntos="1.7">proxy</opcion>
+		<opcion name="servidor" value="deredireccionamiento" puntos="1.6">de redireccionamiento</opcion>
+		<opcion name="servidor" value="delocalizacion" puntos="0">de localizacion</opcion>
+</pregunta>
+
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 6</titulo>
+		<opcion name="adhoc" value="Mesh" puntos="5">Mesh</opcion>
+		<opcion name="adhoc" value="Manet" puntos="0">Manet</opcion>
+		<opcion name="adhoc" value="WSN" puntos="0">WSN</opcion>
+		<opcion name="adhoc" value="Vanet" puntos="0">Vanet</opcion>
+</pregunta>
+
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 7</titulo>	
+		<opcion name="cobertura" value="WBAN" puntos="5">WBAN</opcion>
+		<opcion name="cobertura" value="WPAN" 	puntos="0">WPAN</opcion>
+		<opcion name="cobertura" value="WLAN" puntos="0">WLAN</opcion>
+		<opcion name="cobertura" valor="WWAN" puntos="0">WWAN</opcion>
+</pregunta>
+
+<pregunta tipo="multiple">
+	<titulo>Responde a la pregunta 8</titulo>
+		<opcion name="empresa" value="Movistar" puntos="0">Movistar</opcion>
+		<opcion name="empresa" value="Vodafone" puntos="0">Vodafone</opcion>
+		<opcion name="empresa" value="Orange" puntos="2.5">Orange</opcion>
+		<opcion name="empresa" value="Yoigo" puntos="2.5">Yoigo</opcion>
+</pregunta>
+
+<pregunta tipo="unica">
+	<titulo> Responde a la pregunta 9</titulo>
+		<opcion name="invencion" value="1970" puntos="0">1970</opcion>
+		<opcion name="invencion" value="1969" puntos="5">1969</opcion>
+		<opcion name="invencion" value="1971" puntos="0">1971</opcion>
+		<opcion name="invencion" value="1967" puntos="0">1967</opcion>
 </pregunta>
 
 </preguntas>

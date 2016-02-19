@@ -1,4 +1,4 @@
-<html>
+<html>							
 <head>
 <meta charset="utf-8" />
 <script type="text/javascript" src="preguntas.js"></script>
@@ -6,52 +6,10 @@
 <body>
 <div id="preguntas"></div>
 <script type="text/javascript">
-// En la variable div_preguntas obtenemos el contenedor div con el id 'preguntas'
-var div_preguntas = document.getElementById('preguntas');
 
-var xmlDoc = cargarXMLDoc('preguntas.xml');
-if (xmlDoc != null)
-{
+loadXMLDoc('preguntas.xml');
 
- // Obtenemos la lista de preguntas
- var preguntas_tag = xmlDoc.getElementsByTagName("preguntas")[0].getElementsByTagName("pregunta");
-	
-	//Mezclamos las preguntas
-	fisher_yates(preguntas_tag);
-
-	for (var i = 0; i < preguntas_tag.length; i++)
- {
-  // Obtenemos el título de la pregunta
-  var titulo = preguntas_tag[i].getElementsByTagName("titulo")[0].childNodes[0].nodeValue;
-  //Obtenemos el tipo de la pregunta
-  var tipo=preguntas_tag[i].attributes[0].nodeValue;
-
-  // Obtenemos las opciones de la pregunta
-  var opciones_tag = preguntas_tag[i].getElementsByTagName("opcion");
-  //var id = opciones_tag[0].getAttribute("name");
-  //document.write(id);
-	/*
-		for (var j = 0; j < opciones_tag.length; j++){
-		if(opciones_tag[j].getAttribute("correcta")=="true")
-			document.write(opciones_tag[j].value);
-		}
-		*/
-  //Mezclamos las distintas opciones
-  fisher_yates(opciones_tag);
-  
-  var opciones="";
-
-	if(tipo=="unica")
-		opciones+=unica(opciones_tag);
-		else
-		opciones+=multiple(opciones_tag);
-
-  // Modificamos el contenido html del contenedor div
-   div_preguntas.innerHTML += "<p>" + titulo + "</p>"+opciones;
-	
- }
-
-}
 </script>
+<input type="button" name="test"  value="Corregir todas"  onclick="corrige()"/>
 </body>
 </html>
