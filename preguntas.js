@@ -113,7 +113,7 @@ function unica(opciones_tag,ent){
 	for (var j = 0; j < opciones_tag.length; j++){
 	opciones += "<input type=\"radio\""+atributos(opciones_tag[vector[j]])+"/>"+opciones_tag[vector[j]].childNodes[0].nodeValue+"</br>";
 	}
-		opciones += "<input name=\"valida"+ent+"\" type=\"button\" value=\"Validar\" onclick=\"puntuar("+iden+","+ent+")\"/><input type=\"reset\" value=\"Borrar\" /><form>";
+		opciones += "<input name=\"valida"+ent+"\" type=\"button\" value=\"Validar\" onclick=\"puntuar("+iden+","+ent+")\"/><input name=\"borra"+ent+"\" type=\"reset\" value=\"Borrar\" /><form>";
 	return opciones;
 	
 }
@@ -127,7 +127,7 @@ function multiple(opciones_tag,ent){
 	for (var j = 0; j < opciones_tag.length; j++){
 	opciones += "<input type=\"checkbox\""+atributos(opciones_tag[vector[j]])+"/>"+opciones_tag[vector[j]].childNodes[0].nodeValue+"</br>";
 	}
-		opciones += "<input name=\"valida"+ent+"\" type=\"button\" value=\"Validar\" onclick=\"puntuar("+iden+","+ent+")\"/><input type=\"reset\" value=\"Borrar\" /></form>";
+		opciones += "<input name=\"valida"+ent+"\" type=\"button\" value=\"Validar\" onclick=\"puntuar("+iden+","+ent+")\"/><input name=\"borra"+ent+"\" type=\"reset\" value=\"Borrar\" /></form>";
 	return opciones;
 }
 
@@ -218,23 +218,25 @@ else
 function puntuar(iden, ent){
 	var puntuacion=0;
 	var validado=validacion(iden);
-		if (validado==false){
-			alert("Debes seleccionar una opción");
-			return false;
-		}
-		else {
-			var opt=document.getElementsByName(iden[0].name);
-			var ok=0;
+	var opt=document.getElementsByName(iden[0].name);
+		if (validado!=false){		
 			for(var i=0; i<opt.length;i++){
 				if(opt[i].checked && opt[i].getAttribute("puntos")!="0"){
-					puntuacion+=parseFloat(opt[i].getAttribute("puntos"));
-					document.getElementsByName("valida"+ent).disabled = true; 
+					puntuacion+=parseFloat(opt[i].getAttribute("puntos")); 					
 				}
+				opt[i].disabled = true;
+			}
+		}
+		else{
+			for(var i=0; i<opt.length;i++){
+					opt[i].disabled = true;
+			}
 		}
 		document.getElementsByName("valida"+ent)[0].disabled = true;
+		document.getElementsByName("borra"+ent)[0].disabled = true;
 		alert("Tu puntuación es de: "+puntuacion);
 		return true;
-	}
+	
 }
 
 //Funcion para puntuar una pregunta numerica
@@ -258,33 +260,39 @@ function puntuar(iden,ent,inf,sup){
 */
 //Funcion para corregir todas las preguntas a la vez
 function corrige(){
-	var puntuacion=0;
+		var puntuacion=0;
 	// Obtenemos las opciones de la pregunta
   var opciones_tag = document.getElementsByTagName("input");
-
-	for(var i=0; i<opciones_tag.length-1;i=i+6){	
-	//if(opciones_tag[i].type=="radio" || opciones_tag[i].type=="checkbox" || opciones_tag[i].type=="text"){
-  	var nombre=opciones_tag[i].getAttribute("name");
-
-	var seleccionado=validacion2(nombre);
-	
-		if(seleccionado==false){
-			alert("Hay alguna pregunta sin responder");
-			return false;
+  var i=0;
+  do{
+	  var nombre = opciones_tag[i].getAttribute("name");
+	  var nopciones = document.getElementsByName(nombre);
+	  var seleccionado=validacion2(nombre);
+	  if(seleccionado==false){
+			document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled = true;
+			document.getElementsByName(opciones_tag[i+nopciones.length+1].getAttribute("name"))[0].disabled = true;
+			for(var z=0; z<nopciones.length;z++){
+					nopciones[z].disabled = true;
+			}
+			puntuacion+=0;
 		}
-		else {
-			var opt=document.getElementsByName(nombre);
-			var ok=0;
-			for(var j=0; j<opt.length;j++){
-				if(opt[j].checked && opt[j].getAttribute("puntos")!="0"){
-					puntuacion+=parseFloat(opt[j].getAttribute("puntos"));
+		else{ 
+				if(document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled == false){
+				for(var j=0; j<nopciones.length;j++){
+					if(nopciones[j].checked && nopciones[j].getAttribute("puntos")!="0"){
+						puntuacion+=parseFloat(nopciones[j].getAttribute("puntos"));
+					}
+					nopciones[j].disabled = true;
+			}
+			document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled = true;
+			document.getElementsByName(opciones_tag[i+nopciones.length+1].getAttribute("name"))[0].disabled = true;
 				}
-		}		
-	}
-	//}
-	}
+		}
+	 i=i+nopciones.length+2;
+  }while(i<opciones_tag.length-1);
+  
 	alert("Tu puntuación es de: "+puntuacion);
 	document.getElementsByName("test")[0].disabled = true;
 	return true;
-		
+	
 }
