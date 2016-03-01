@@ -135,13 +135,8 @@ function multiple(opciones_tag,ent){
 function numerica(opciones_tag,ent){
 	var iden=opciones_tag[0].getAttribute("name");
 	//Comprobamos cual es el limite inferior y superior de la opcion
-	if(opciones_tag[0].getAttribute("tipo")=="inf"){
-		var inferior=parseFloat(opciones_tag[0].childNodes[0].nodeValue);
-		var superior=parseFloat(opciones_tag[1].childNodes[0].nodeValue);
-	}else{
-		var superior=parseFloat(opciones_tag[0].childNodes[0].nodeValue);
-		var inferior=parseFloat(opciones_tag[1].childNodes[0].nodeValue);
-	}
+		var inferior=parseFloat(opciones_tag[0].getAttribute("inferior"));
+		var superior=parseFloat(opciones_tag[0].getAttribute("superior"));
 	
 	var opciones="<form name=\"formulario\">";
 	opciones += "Escribe el valor: <input type=\"text\""+atributos(opciones_tag[0])+" size=\"3\" maxlength=\"3\"/></br></br>";
@@ -246,7 +241,7 @@ function puntuar(iden, ent){
 	
 }
 
-//Funcion para puntuar una pregunta numerica
+//Funcion para puntuar una pregunta numérica
 
 function puntuarNum(iden, ent, inf, sup){
 	var puntuacion=0;
@@ -255,8 +250,10 @@ function puntuarNum(iden, ent, inf, sup){
 
 		if(valor<=sup && valor>=inf)
 			puntuacion+=parseFloat(puntos);
+		//Deshabilitamos los botones
 		document.getElementsByName("valida"+ent)[0].disabled = true;
 		document.getElementsByName("borra"+ent)[0].disabled = true;
+		document.getElementsByName(iden.name)[0].disabled = true;
 		alert("Tu puntuación es de: "+puntuacion);
 		return true;
 
@@ -272,26 +269,39 @@ function corrige(){
 	  var nombre = opciones_tag[i].getAttribute("name");
 	  var nopciones = document.getElementsByName(nombre);
 	  var seleccionado=validacion2(nombre);
-	  if(seleccionado==false){
-			document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled = true;
-			document.getElementsByName(opciones_tag[i+nopciones.length+1].getAttribute("name"))[0].disabled = true;
+	  //Si no hay ninguna opción señalada y la pregunta no es de tipo numérica
+	  if(seleccionado==false && opciones_tag[i].getAttribute("type")!="text"){
+
 			for(var z=0; z<nopciones.length;z++){
 					nopciones[z].disabled = true;
 			}
 			puntuacion+=0;
 		}
 		else{ 
-				if(document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled == false){
+			//Si están respondidas y no son de tipo numéricas
+				if(document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled == false && opciones_tag[i].getAttribute("type")!="text"){
 				for(var j=0; j<nopciones.length;j++){
 					if(nopciones[j].checked && nopciones[j].getAttribute("puntos")!="0"){
 						puntuacion+=parseFloat(nopciones[j].getAttribute("puntos"));
 					}
 					nopciones[j].disabled = true;
 			}
-			document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled = true;
-			document.getElementsByName(opciones_tag[i+nopciones.length+1].getAttribute("name"))[0].disabled = true;
+
+				}
+				//Si la pregunta es de tipo numérica
+				if(opciones_tag[i].getAttribute("type")=="text"){
+						if(document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled == false){
+					var inf=parseFloat(opciones_tag[i].getAttribute("inferior"));
+					var sup=parseFloat(opciones_tag[i].getAttribute("superior"));
+					var valor=parseFloat(opciones_tag[i].value);
+						if(valor<=sup && valor>=inf)
+							puntuacion+=parseFloat(opciones_tag[i].getAttribute("puntos"));
+						}
+						opciones_tag[i].disabled = true;
 				}
 		}
+		document.getElementsByName(opciones_tag[i+nopciones.length].getAttribute("name"))[0].disabled = true;
+		document.getElementsByName(opciones_tag[i+nopciones.length+1].getAttribute("name"))[0].disabled = true;
 	 i=i+nopciones.length+2;
   }while(i<opciones_tag.length-1);
   
