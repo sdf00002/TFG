@@ -134,11 +134,18 @@ function multiple(opciones_tag,ent){
 //Funcion crear pregunta numerica
 function numerica(opciones_tag,ent){
 	var iden=opciones_tag[0].getAttribute("name");
-	var inferior=parseFloat(opciones_tag[0].getAttribute("value"));
-	var superior=parseFloat(opciones_tag[1].getAttribute("value"));
-	var opciones="<form name=\"formulario\" onsubmit=\"return puntuar("+iden+","+ent+","+inferior+","+superior+")\">";
-	opciones += "Escribe el valor: <input type=\"text\" name=\""+opciones_tag[0].getAttribute("name")+"\" size=\"3\" maxlength=\"3\"/></br></br>";
-		opciones += "<input name=\"valida"+ent+"\" type=\"submit\" value=\"Validar\"/><input type=\"reset\" value=\"Borrar\" /></form>";
+	//Comprobamos cual es el limite inferior y superior de la opcion
+	if(opciones_tag[0].getAttribute("tipo")=="inf"){
+		var inferior=parseFloat(opciones_tag[0].childNodes[0].nodeValue);
+		var superior=parseFloat(opciones_tag[1].childNodes[0].nodeValue);
+	}else{
+		var superior=parseFloat(opciones_tag[0].childNodes[0].nodeValue);
+		var inferior=parseFloat(opciones_tag[1].childNodes[0].nodeValue);
+	}
+	
+	var opciones="<form name=\"formulario\">";
+	opciones += "Escribe el valor: <input type=\"text\""+atributos(opciones_tag[0])+" size=\"3\" maxlength=\"3\"/></br></br>";
+		opciones += "<input name=\"valida"+ent+"\" type=\"button\" value=\"Validar\" onclick=\"puntuarNum("+iden+","+ent+","+inferior+","+superior+")\"/><input name=\"borra"+ent+"\" type=\"reset\" value=\"Borrar\" /></form>";
 	return opciones;
 }
 
@@ -240,24 +247,21 @@ function puntuar(iden, ent){
 }
 
 //Funcion para puntuar una pregunta numerica
-/*
-function puntuar(iden,ent,inf,sup){
+
+function puntuarNum(iden, ent, inf, sup){
 	var puntuacion=0;
-	var validado=validaTexto(iden);
-	if (validado==false){
-			alert("Debes incluir un valor");
-			return false;
-		}
-			else {
-			var valor=parseFloat(iden.value);
-			if(valor<=sup && valor>=inf)
-				puntuacion+=5;
+		var valor=parseFloat(iden.value);
+		var puntos=document.getElementsByName(iden.name)[0].getAttribute("puntos");
+
+		if(valor<=sup && valor>=inf)
+			puntuacion+=parseFloat(puntos);
 		document.getElementsByName("valida"+ent)[0].disabled = true;
+		document.getElementsByName("borra"+ent)[0].disabled = true;
 		alert("Tu puntuación es de: "+puntuacion);
 		return true;
-	}
+
 }
-*/
+
 //Funcion para corregir todas las preguntas a la vez
 function corrige(){
 		var puntuacion=0;
